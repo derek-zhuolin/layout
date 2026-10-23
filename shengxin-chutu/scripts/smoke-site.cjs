@@ -10,7 +10,7 @@ const out = process.env.SMOKE_REPORT_DIR || path.join(os.tmpdir(), 'shengxin-chu
 const data = JSON.parse(fs.readFileSync(path.join(root, 'shengxin-chutu/assets/playground/data.js'), 'utf8').split('=').slice(1).join('=').trim().replace(/;$/, ''));
 const publicBase = 'https://derek-zhuolin.github.io/xhs-card/';
 const url = name => base ? new URL(name, base.endsWith('/') ? base : base + '/').href : pathToFileURL(path.join(root, name)).href;
-const report = {target: base || 'local checkout', checks: [], pageMetrics: [], errors: [], officialRichResultsTest: 'not submitted'};
+const report = {target: base || 'local checkout', checks: [], pageMetrics: [], errors: [], googleRichResultsTest: 'not submitted'};
 const candidates = [process.env.CHROMIUM_EXECUTABLE, chromium.executablePath(), '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'];
 const cache = path.join(os.homedir(), 'Library/Caches/ms-playwright');
 if (fs.existsSync(cache)) for (const name of fs.readdirSync(cache).filter(x => /^chromium-/.test(x)).sort().reverse()) candidates.push(path.join(cache, name, 'chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing'));
@@ -30,10 +30,13 @@ function graph(html) {
   const page = await context.newPage();
   page.setDefaultNavigationTimeout(60000);
   page.on('pageerror', e => report.errors.push(e.message));
+  let requestedFonts = new Set();
+  page.on('request', request => {const name=new URL(request.url()).pathname.split('/').pop();if(/\.(otf|woff2)$/.test(name))requestedFonts.add(name);});
   const names = ['index.html', 'shengxin-chutu/assets/playground/index.html', 'shengxin-chutu/assets/approved-cases/index.html'];
   const entities = new Map();
   const graphs = [];
   for (const name of names) {
+    requestedFonts = new Set();
     const response = await page.goto(url(name), {waitUntil:'domcontentloaded'});
     if (base) assert(response.status() === 200, name + ': HTTP status');
     const html = await page.content();
@@ -51,8 +54,8 @@ function graph(html) {
       await page.evaluate(async () => {await document.fonts.ready; await Promise.all([...document.images].map(x => x.decode()));});
       const metrics = await page.evaluate(() => ({overflow:document.documentElement.scrollWidth > innerWidth + 2,images:[...document.images].every(x => x.naturalWidth > 0),font:document.fonts.check('700 30px SH'),fontResources:performance.getEntriesByType('resource').filter(x=>/\.(otf|woff2)(\?|$)/.test(x.name)).map(x=>({file:x.name.split('/').pop().split('?')[0],durationMs:Math.round(x.duration),bytes:x.transferSize})),domReadyMs:Math.round(performance.getEntriesByType('navigation')[0].domContentLoadedEventEnd)}));
       assert(!metrics.overflow && metrics.images && metrics.font, name + ': mobile/desktop media or layout');
-      assert(!metrics.fontResources.some(x=>x.file.endsWith('.otf')), name + ': unexpected full-font fallback download');
-      if(viewport.width===1440) report.pageMetrics.push({page:name,domReadyMs:metrics.domReadyMs,fontResources:metrics.fontResources});
+      assert(![...requestedFonts].some(x=>x.endsWith('.otf')) && !metrics.fontResources.some(x=>x.file.endsWith('.otf')), name + ': unexpected full-font fallback download');
+      if(viewport.width===1440) report.pageMetrics.push({page:name,domReadyMs:metrics.domReadyMs,fontResources:metrics.fontResources,requestedFonts:[...requestedFonts]});
       await page.screenshot({path:path.join(out, (names.indexOf(name) + 1) + '-' + viewport.width + '.png'),fullPage:true});
     }
   }
