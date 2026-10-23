@@ -98,7 +98,7 @@ npm run render
 npm run verify
 ```
 
-生成三种比例各三页 PNG，以及每种比例和整组总览。字体和图标离线随包。可用 `CHROMIUM_EXECUTABLE` 指定已有浏览器，`NODE_PATH` 指定已有依赖。
+生成三种比例各三页 PNG，以及每种比例和整组总览。字体和图标离线随包。在线预览优先加载随包的轻量字体子集，新字符可回退到完整思源黑体。可用 `CHROMIUM_EXECUTABLE` 指定已有浏览器，`NODE_PATH` 指定已有依赖。
 
 ## 规则怎么分
 
