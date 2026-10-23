@@ -4,9 +4,9 @@
 
 ## 公开页面
 
-- [项目首页](https://derek-zhuolin.github.io/xhs-card/)
-- [Playground](https://derek-zhuolin.github.io/xhs-card/shengxin-chutu/assets/playground/index.html)
-- [真实案例](https://derek-zhuolin.github.io/xhs-card/shengxin-chutu/assets/approved-cases/index.html)
+- [项目首页](https://derek-zhuolin.github.io/chutu/)
+- [Playground](https://derek-zhuolin.github.io/chutu/shengxin-chutu/assets/playground/index.html)
+- [真实案例](https://derek-zhuolin.github.io/chutu/shengxin-chutu/assets/approved-cases/index.html)
 
 ## 结果
 
@@ -44,7 +44,7 @@
 
 ```sh
 npm run smoke
-SITE_URL=https://derek-zhuolin.github.io/xhs-card/ npm run smoke
+SITE_URL=https://derek-zhuolin.github.io/chutu/ npm run smoke
 ```
 
 验证器入口：[Schema.org Validator](https://validator.schema.org/)。没有提交 Google Rich Results Test 或 Search Console，不将 schema 验证通过等同于 Google 已收录或一定展示富结果。

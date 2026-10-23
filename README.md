@@ -2,11 +2,11 @@
 
 把原话和素材，做成轮播、长卡，或者 Keynote 式 deck。
 
-主命令为 `$shengxin-chutu`，旧命令 `$xhs-card` 保留兼容。GitHub 仓库地址继续使用 `xhs-card`。
+主命令为 `$shengxin-chutu`，旧命令 `$xhs-card` 保留兼容。GitHub 仓库地址使用 `chutu`。
 
 蓝白黑、思源黑体、手绘 icon、轻 UI 层次。支持 **3:4、9:16、16:9、4:3**；换比例时重新排版，不拉伸原图。
 
-[查看定稿真实案例](shengxin-chutu/assets/approved-cases/index.html) · [打开 Playground](https://derek-zhuolin.github.io/xhs-card/shengxin-chutu/assets/playground/index.html) · [Reference 与致敬](NOTICE.md) · [Skill 入口](shengxin-chutu/SKILL.md)
+[查看定稿真实案例](shengxin-chutu/assets/approved-cases/index.html) · [打开 Playground](https://derek-zhuolin.github.io/chutu/shengxin-chutu/assets/playground/index.html) · [Reference 与致敬](NOTICE.md) · [Skill 入口](shengxin-chutu/SKILL.md)
 
 ## 先说参考从哪来
 
@@ -24,7 +24,7 @@
 
 ![三张定稿真实案例](shengxin-chutu/assets/approved-cases/overview.jpg)
 
-[查看完整大图与下载](https://derek-zhuolin.github.io/xhs-card/shengxin-chutu/assets/approved-cases/index.html) · [案例说明](shengxin-chutu/references/approved-cases.md)
+[查看完整大图与下载](https://derek-zhuolin.github.io/chutu/shengxin-chutu/assets/approved-cases/index.html) · [案例说明](shengxin-chutu/references/approved-cases.md)
 
 下面保留四种比例的模板示例。活动、表达、流程页使用合成内容；图文素材板引用已确认的真实案例。文案和素材可替换。
 
@@ -57,9 +57,9 @@
 复制 `shengxin-chutu/` 文件夹到你的 Agent 的 Skill 目录。例如 Codex：
 
 ```sh
-git clone https://github.com/derek-zhuolin/xhs-card.git
+git clone https://github.com/derek-zhuolin/chutu.git
 mkdir -p ~/.codex/skills
-cp -R ./xhs-card/shengxin-chutu ./xhs-card/xhs-card ~/.codex/skills/
+cp -R ./chutu/shengxin-chutu ./chutu/xhs-card ~/.codex/skills/
 ```
 
 上面同时安装主包和旧命令兼容入口；主包自带字体、图标、模板和脚本。已有同名 Skill 时先保留自己的修改，再合并新版本。
@@ -104,7 +104,7 @@ cp -R ./xhs-card/shengxin-chutu ./xhs-card/xhs-card ~/.codex/skills/
 
 ## Playground
 
-[在线体验](https://derek-zhuolin.github.io/xhs-card/shengxin-chutu/assets/playground/index.html) 按竖版卡片（3:4、9:16）和横版 deck（16:9、4:3）分组，可切换比例、案例、平面/轻浮起层次，支持缩略图跳转、方向键翻页和全屏。也可直接打开本地 `index.html`，完全使用随包字体与图标。
+[在线体验](https://derek-zhuolin.github.io/chutu/shengxin-chutu/assets/playground/index.html) 按竖版卡片（3:4、9:16）和横版 deck（16:9、4:3）分组，可切换比例、案例、平面/轻浮起层次，支持缩略图跳转、方向键翻页和全屏。也可直接打开本地 `index.html`，完全使用随包字体与图标。
 
 HTML/CSS 源稿可编辑；PNG 是出图结果。Keynote 式指排版方向，不代表已经生成原生 `.key` 文件。整页图片组成的 PPTX 要注明图版，不能称文字原生可编辑。
 
@@ -146,13 +146,13 @@ npm run smoke
 
 首页使用 `WebSite`、`WebPage` 和 `SoftwareSourceCode` 描述真实的开源项目；Playground 和真实案例页使用 `CollectionPage`、`ItemList`，案例图片使用 `ImageObject`。没有虚构评分、评论、价格、活动日期或使用人数。
 
-[结构化数据字段与依据](docs/structured-data.md)。中文展示名为「省心出图」，主命令为 `shengxin-chutu`，GitHub 仓库保留 `xhs-card`。
+[结构化数据字段与依据](docs/structured-data.md)。中文展示名为「省心出图」，主命令为 `shengxin-chutu`，GitHub 仓库使用 `chutu`。
 
 
 线上冒烟（替换为你的 Pages URL）：
 
 ```sh
-SITE_URL=https://derek-zhuolin.github.io/xhs-card/ npm run smoke
+SITE_URL=https://derek-zhuolin.github.io/chutu/ npm run smoke
 ```
 
 检查首页、schema、手机布局、四比例共 16 张图、下载尺寸、翻页、图层、全屏与旧链接兼容。报告默认写入系统临时目录，不写入公开仓库。

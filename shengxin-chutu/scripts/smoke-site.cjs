@@ -9,7 +9,7 @@ const root = path.resolve(process.argv[2] || path.join(__dirname, '../..'));
 const base = process.env.SITE_URL;
 const out = process.env.SMOKE_REPORT_DIR || path.join(os.tmpdir(), 'shengxin-chutu-smoke');
 const data = JSON.parse(fs.readFileSync(path.join(root, 'shengxin-chutu/assets/playground/data.js'), 'utf8').split('=').slice(1).join('=').trim().replace(/;$/, ''));
-const publicBase = 'https://derek-zhuolin.github.io/xhs-card/';
+const publicBase = 'https://derek-zhuolin.github.io/chutu/';
 const url = name => base ? new URL(name, base.endsWith('/') ? base : base + '/').href : pathToFileURL(path.join(root, name)).href;
 const report = {target: base || 'local checkout', checks: [], pageMetrics: [], errors: [], googleRichResultsTest: 'not submitted'};
 const candidates = [process.env.CHROMIUM_EXECUTABLE, chromium.executablePath(), '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'];
