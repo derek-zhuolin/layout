@@ -55,3 +55,15 @@ SITE_URL=https://derek-zhuolin.github.io/layout/ npm run smoke
 名称、公开链接、命令和图片标识已更新，主命令为 `$layout`；`$shengxin-chutu` 和 `$xhs-card` 保留兼容入口。
 
 新站三页通过 Schema.org 官方验证：0 错误、0 警告。线上检查通过桌面/手机页面、四种比例各四页、16 张 PNG 完整文件一致性、翻页、层次、全屏、异常参数恢复、两个旧入口跳转和 schema 图片尺寸。一次旧案例页完整 load 等待超时，目标链接已确认正确；将跳转断言改为 domcontentloaded 后补验通过。未提交 Google Rich Results Test。
+
+
+## 描述、面包屑与图片来源（2026-10-24）
+
+对应代码提交：`967f316`。
+
+- 首页 meta / Open Graph 与三页共享 JSON-LD 统一为「开源排版 Skill」，与页面实际功能一致。
+- Playground、真实案例页新增可见面包屑及对应 `BreadcrumbList`；名称、层级和 URL 一致。
+- 展示图片补充 `creditText`，分别注明 Ian 的排版参考、Oreo Design / Nicole Tang 的图标、Adobe / Google 的字体；包含真实照片的案例注明互通有无往期活动现场来源。
+- 未确认摄影师、版权人或照片授权协议，因此不填写图片 `creator`、`copyrightNotice`、`license`，不把代码 MIT 当成照片许可。
+- 三页线上 Schema.org 官方验证均为 0 错误、0 警告，已识别新版描述、图片署名与两个内页面包屑。本地与线上冒烟、手机与桌面布局检查通过；16 张 PNG 完整下载一致，翻页、比例切换、全屏、异常参数及旧链接跳转正常，浏览器运行错误为 0。
+- Google Rich Results Test 本轮复验受浏览器空白页与超时影响，未取得可靠的新报告，不标为通过。此前首页与 Playground 的旧报告为未检测到富媒体结果，不代表本轮新增标记的测试结论。未进行 Search Console 收录提交。
