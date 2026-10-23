@@ -1,12 +1,12 @@
-# 省心出图 · 发布验证
+# Layout · 发布验证
 
-验证日期：2026-10-23。项目主命令 `$shengxin-chutu`，保留 `$xhs-card` 兼容入口。
+验证日期：2026-10-23。项目主命令 `$layout`，保留 `$xhs-card` 兼容入口。
 
 ## 公开页面
 
-- [项目首页](https://derek-zhuolin.github.io/chutu/)
-- [Playground](https://derek-zhuolin.github.io/chutu/shengxin-chutu/assets/playground/index.html)
-- [真实案例](https://derek-zhuolin.github.io/chutu/shengxin-chutu/assets/approved-cases/index.html)
+- [项目首页](https://derek-zhuolin.github.io/layout/)
+- [Playground](https://derek-zhuolin.github.io/layout/layout/assets/playground/index.html)
+- [真实案例](https://derek-zhuolin.github.io/layout/layout/assets/approved-cases/index.html)
 
 ## 结果
 
@@ -44,7 +44,12 @@
 
 ```sh
 npm run smoke
-SITE_URL=https://derek-zhuolin.github.io/chutu/ npm run smoke
+SITE_URL=https://derek-zhuolin.github.io/layout/ npm run smoke
 ```
 
 验证器入口：[Schema.org Validator](https://validator.schema.org/)。没有提交 Google Rich Results Test 或 Search Console，不将 schema 验证通过等同于 Google 已收录或一定展示富结果。
+
+
+## Layout 名称迁移（2026-10-24）
+
+名称、公开链接、命令和图片标识已更新；本轮线上冒烟结果将在部署后补记。旧名称命令保留兼容入口。

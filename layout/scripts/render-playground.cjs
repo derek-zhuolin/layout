@@ -2,8 +2,8 @@
 const fs=require('fs'),path=require('path'),os=require('os');
 const {chromium}=require('playwright'),sharp=require('sharp');
 const root=path.resolve(process.argv[2]||path.join(__dirname,'../..'));
-const tpl=path.join(root,'shengxin-chutu/assets/playground');
-if(!fs.existsSync(path.join(tpl,'slides.html')))throw Error('Pass the repository root containing shengxin-chutu/assets/playground.');
+const tpl=path.join(root,'layout/assets/playground');
+if(!fs.existsSync(path.join(tpl,'slides.html')))throw Error('Pass the repository root containing layout/assets/playground.');
 function browserPath(){const c=[process.env.CHROMIUM_EXECUTABLE,chromium.executablePath(),'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'];const cache=path.join(os.homedir(),'Library/Caches/ms-playwright');if(fs.existsSync(cache))for(const x of fs.readdirSync(cache).filter(x=>/^chromium-/.test(x)).sort().reverse())c.push(path.join(cache,x,'chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing'));return c.find(x=>x&&fs.existsSync(x));}
 (async()=>{const browser=await chromium.launch({headless:true,executablePath:browserPath()});const page=await browser.newPage({viewport:{width:1700,height:1500},deviceScaleFactor:2});const qa={ratios:[],issues:[],userReview:'pending'};const rows=[];
 const data=JSON.parse(fs.readFileSync(path.join(tpl,'data.js'),'utf8').split('=').slice(1).join('=').trim().replace(/;$/,''));
@@ -13,7 +13,7 @@ for(const format of data.formats){const f={...format,w:format.width,h:format.hei
  qa.ratios.push({ratio:f.id,...result});qa.issues.push(...result.issues);if(result.issues.length||!result.fontLoaded)throw Error(JSON.stringify(qa));
  for(let i=0;i<data.cases.length;i++)await page.locator('.slide').nth(i).screenshot({path:path.join(dest,String(i+1).padStart(2,'0')+'.png')});
  const cw=480,ch=Math.round(cw*f.h/f.w),composite=[];for(let i=0;i<data.cases.length;i++)composite.push({input:await sharp(path.join(dest,String(i+1).padStart(2,'0')+'.png')).resize(cw,ch).png().toBuffer(),left:24+i*504,top:47});
- const label=Buffer.from('<svg width="1992" height="30"><text x="3" y="21" font-size="18" font-family="sans-serif" fill="#4d708b">'+f.id.replace('x',':')+' / EASY VISUAL / ACTIVITY - EXPRESSION - WORKFLOW - PHOTO</text></svg>');composite.push({input:label,left:24,top:8});const row=await sharp({create:{width:24+504*data.cases.length,height:ch+72,channels:3,background:'#e8ebee'}}).composite(composite).jpeg({quality:93}).toBuffer();fs.writeFileSync(path.join(dest,'overview.jpg'),row);rows.push(row);console.log('Rendered '+f.id+' ('+data.cases.length+' pages)');
+ const label=Buffer.from('<svg width="1992" height="30"><text x="3" y="21" font-size="18" font-family="sans-serif" fill="#4d708b">'+f.id.replace('x',':')+' / LAYOUT / ACTIVITY - EXPRESSION - WORKFLOW - PHOTO</text></svg>');composite.push({input:label,left:24,top:8});const row=await sharp({create:{width:24+504*data.cases.length,height:ch+72,channels:3,background:'#e8ebee'}}).composite(composite).jpeg({quality:93}).toBuffer();fs.writeFileSync(path.join(dest,'overview.jpg'),row);rows.push(row);console.log('Rendered '+f.id+' ('+data.cases.length+' pages)');
 }
 let y=0,total=0;for(const r of rows){const m=await sharp(r).metadata();total+=m.height;}const combined=[];for(const r of rows){combined.push({input:r,left:0,top:y});y+=(await sharp(r).metadata()).height;}await sharp({create:{width:24+504*data.cases.length,height:total,channels:3,background:'#e8ebee'}}).composite(combined).jpeg({quality:92}).toFile(path.join(root,'examples/overview.jpg'));
 fs.writeFileSync(path.join(root,'qa-local.json'),JSON.stringify(qa,null,2));await browser.close();console.log((data.formats.length*data.cases.length)+' PNGs and '+(data.formats.length+1)+' overview images exported.');

@@ -1,6 +1,6 @@
-# 省心出图 · 结构化数据说明
+# Layout · 结构化数据说明
 
-展示名为「省心出图」，主命令为 `$shengxin-chutu`；旧命令 `$xhs-card` 和 GitHub 仓库地址保持兼容。
+展示名为「Layout」，主命令为 `$layout`；旧命令 `$xhs-card` 和 GitHub 仓库地址保持兼容。
 
 ## 页面与真实内容
 

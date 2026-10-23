@@ -7,9 +7,9 @@ const {pathToFileURL} = require('url');
 const {chromium} = require('playwright');
 const root = path.resolve(process.argv[2] || path.join(__dirname, '../..'));
 const base = process.env.SITE_URL;
-const out = process.env.SMOKE_REPORT_DIR || path.join(os.tmpdir(), 'shengxin-chutu-smoke');
-const data = JSON.parse(fs.readFileSync(path.join(root, 'shengxin-chutu/assets/playground/data.js'), 'utf8').split('=').slice(1).join('=').trim().replace(/;$/, ''));
-const publicBase = 'https://derek-zhuolin.github.io/chutu/';
+const out = process.env.SMOKE_REPORT_DIR || path.join(os.tmpdir(), 'layout-smoke');
+const data = JSON.parse(fs.readFileSync(path.join(root, 'layout/assets/playground/data.js'), 'utf8').split('=').slice(1).join('=').trim().replace(/;$/, ''));
+const publicBase = 'https://derek-zhuolin.github.io/layout/';
 const url = name => base ? new URL(name, base.endsWith('/') ? base : base + '/').href : pathToFileURL(path.join(root, name)).href;
 const report = {target: base || 'local checkout', checks: [], pageMetrics: [], errors: [], googleRichResultsTest: 'not submitted'};
 const candidates = [process.env.CHROMIUM_EXECUTABLE, chromium.executablePath(), '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'];
@@ -40,7 +40,7 @@ function graph(html) {
   page.on('pageerror', e => report.errors.push(e.message));
   let requestedFonts = new Set();
   page.on('request', request => {const name=new URL(request.url()).pathname.split('/').pop();if(/\.(otf|woff2)$/.test(name))requestedFonts.add(name);});
-  const names = ['index.html', 'shengxin-chutu/assets/playground/index.html', 'shengxin-chutu/assets/approved-cases/index.html'];
+  const names = ['index.html', 'layout/assets/playground/index.html', 'layout/assets/approved-cases/index.html'];
   const entities = new Map();
   const graphs = [];
   for (const name of names) {
@@ -55,7 +55,7 @@ function graph(html) {
       entities.set(node['@id'], node);
     }
     const meta = await page.evaluate(() => ({title:document.title, desc:document.querySelector('meta[name="description"]')?.content, canonical:document.querySelector('link[rel="canonical"]')?.href,refresh:!!document.querySelector('meta[http-equiv="refresh"]')}));
-    assert(meta.title.includes('省心出图') && meta.desc && meta.canonical.startsWith(publicBase) && !meta.refresh, name + ': metadata');
+    assert(meta.title.includes('Layout') && meta.desc && meta.canonical.startsWith(publicBase) && !meta.refresh, name + ': metadata');
     report.checks.push(name + ': HTTP, title, description, canonical, JSON-LD');
     for (const viewport of [{width:1440,height:1050},{width:390,height:844}]) {
       await page.setViewportSize(viewport);
@@ -77,7 +77,7 @@ function graph(html) {
   for (const node of graphs) assert(supportedTypes.includes(node['@type']), 'Unexpected schema type');
   report.checks.push('3 page graphs: JSON syntax, type inventory and entity references');
   await page.setViewportSize({width:1440,height:1050});
-  await page.goto(url('shengxin-chutu/assets/playground/index.html'), {waitUntil:'load'});
+  await page.goto(url('layout/assets/playground/index.html'), {waitUntil:'load'});
   for (const format of data.formats) {
     await page.locator('#ratio').selectOption(format.id);
     for (const item of data.cases) {
@@ -125,21 +125,24 @@ function graph(html) {
   await page.waitForFunction(() => !document.fullscreenElement);
   report.checks.push('fullscreen entry and exit');
   for (const query of ['ratio=unknown&slide=abc','ratio=3x4&slide=-1','ratio=3x4&slide=1.5']) {
-    await page.goto(url('shengxin-chutu/assets/playground/index.html') + '?' + query);
+    await page.goto(url('layout/assets/playground/index.html') + '?' + query);
     await page.waitForFunction(() => document.querySelector('#counter').textContent === '1 / 4');
     await page.locator('#frame').contentFrame().locator('.cover.selected').waitFor();
   }
   report.checks.push('invalid / negative / fractional slide queries recover');
   await page.goto(url('xhs-card/assets/playground/index.html') + '?ratio=9x16&slide=4');
-  await page.waitForURL('**/shengxin-chutu/assets/playground/index.html?ratio=9x16&slide=4');
+  await page.waitForURL('**/layout/assets/playground/index.html?ratio=9x16&slide=4');
   await page.waitForFunction(() => document.querySelector('#counter').textContent === '4 / 4');
   await page.locator('#frame').contentFrame().locator('.caseboard.selected.r-9x16').waitFor();
   await page.goto(url('xhs-card/assets/approved-cases/index.html'));
-  await page.waitForURL('**/shengxin-chutu/assets/approved-cases/index.html');
-  report.checks.push('legacy Playground preserves ratio/slide; legacy gallery redirects');
+  await page.waitForURL('**/layout/assets/approved-cases/index.html');
+  await page.goto(url('shengxin-chutu/assets/playground/index.html') + '?ratio=16x9&slide=2');
+  await page.waitForURL('**/layout/assets/playground/index.html?ratio=16x9&slide=2');
+  await page.waitForFunction(() => document.querySelector('#counter').textContent === '2 / 4');
+  report.checks.push('both legacy Playground paths preserve ratio/slide; legacy gallery redirects');
   if (base) for (const filename of ['01.png','02.png','03.png']) {
     const old = downloadBytes(url('xhs-card/assets/approved-cases/' + filename));
-    const fresh = downloadBytes(url('shengxin-chutu/assets/approved-cases/' + filename));
+    const fresh = downloadBytes(url('layout/assets/approved-cases/' + filename));
     assert(old.equals(fresh), 'Legacy image mismatch');
   }
   for (const node of graphs.filter(x => x['@type'] === 'ImageObject')) {
