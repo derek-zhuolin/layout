@@ -20,7 +20,7 @@ SoftwareSourceCode 的 MIT 指向代码与文档许可。真实照片没有添�
 
 - 本地检查 JSON 语法、实体关系、必要标识、URL 与实际图片文件、可见文案和图片尺寸。
 - 浏览器检查桌面和手机页面、图片和字体、四比例/四案例翻页、图层、下载与全屏。
-- 尚未提交更新内容到 Google Rich Results Test、Schema.org Validator 或 Search Console。没有声称通过线上官方验证、已被收录或一定出现富结果。
+- 2026-10-23，已把公开首页、Playground 和真实案例页 URL 提交 Schema.org Validator，三页均为 0 错误、0 警告。尚未提交 Google Rich Results Test 或 Search Console，不声称已被收录或一定出现富结果。
 - 这里主要用于描述项目、页面和案例。没有为了申请 SoftwareApplication 的富结果而编造评论和报价；Google 是否呈现特殊搜索样式由其自行决定。
 
 ## Reference
@@ -32,3 +32,5 @@ SoftwareSourceCode 的 MIT 指向代码与文档许可。真实照片没有添�
 - [Schema.org：ImageObject](https://schema.org/ImageObject)
 
 本地复查：2026-10-23。
+
+线上加载检查还应确认没有为少量缺字额外下载完整 OTF。随包 `scripts/subset-fonts.py` 会按当前文本刷新 WOFF2 与 Unicode coverage；冒烟脚本会检查是否出现完整字体回退请求。

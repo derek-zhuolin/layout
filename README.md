@@ -120,7 +120,7 @@ npm run verify
 npm run smoke
 ```
 
-生成四种比例各四页 PNG，以及每种比例和整组总览。字体和图标离线随包。在线预览优先加载随包的轻量字体子集，新字符可回退到完整思源黑体。可用 `CHROMIUM_EXECUTABLE` 指定已有浏览器，`NODE_PATH` 指定已有依赖。
+生成四种比例各四页 PNG，以及每种比例和整组总览。字体和图标离线随包。在线预览优先加载随包的轻量字体子集，新字符可回退到完整思源黑体；改文案后可运行 `python3 shengxin-chutu/scripts/subset-fonts.py .` 更新子集，避免为少数字额外加载完整字体（需 fontTools、brotli）。可用 `CHROMIUM_EXECUTABLE` 指定已有浏览器，`NODE_PATH` 指定已有依赖。
 
 流程页会把说明、步骤与总结放成连续的一组；组件之间留出间隔。纯文字页通过字号与颜色分层，没有引用关系时不加装饰性大引号。
 
