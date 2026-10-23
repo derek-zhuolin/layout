@@ -4,7 +4,7 @@
 
 蓝白黑、思源黑体、手绘 icon、轻 UI 层次。支持 **3:4、9:16、16:9、4:3**；换比例时重新排版，不拉伸原图。
 
-[打开 Playground](https://derek-zhuolin.github.io/xhs-card/) · [Reference 与致敬](NOTICE.md) · [Skill 入口](xhs-card/SKILL.md)
+[查看定稿真实案例](xhs-card/assets/approved-cases/index.html) · [打开 Playground](https://derek-zhuolin.github.io/xhs-card/) · [Reference 与致敬](NOTICE.md) · [Skill 入口](xhs-card/SKILL.md)
 
 ## 先说参考从哪来
 
@@ -18,7 +18,13 @@
 
 ## 看实际效果
 
-下面都是仓库内模板实际渲染的图片。示例为合成内容，不是真实活动公告；可以替换成自己的文案和授权素材。
+先看这次确认的三张真实案例，后续视觉以这组为参考：真实现场照片、Builder 表达、手绘 icon 与轻 UI 层次。
+
+![三张定稿真实案例](xhs-card/assets/approved-cases/overview.jpg)
+
+[查看完整大图与下载](https://derek-zhuolin.github.io/xhs-card/xhs-card/assets/approved-cases/index.html) · [案例说明](xhs-card/references/approved-cases.md)
+
+下面保留四种比例的模板示例。这些示例使用合成内容，用来展示重排方式；文案和素材可替换。
 
 ### 3:4 · 小红书轮播
 
@@ -130,4 +136,4 @@ npm run verify
 
 ## License
 
-本项目代码与文档采用 [MIT](LICENSE)。第三方图标保留 [Oreo Design / Nicole Tang 的 MIT 许可](xhs-card/assets/icons/LICENSE)，字体保留 [OFL 许可](xhs-card/assets/fonts/OFL.txt)。参考作品的归属见 NOTICE；公开包没有包含原作者截图、私人原稿或现场人物照片。
+本项目代码与文档采用 [MIT](LICENSE)。第三方图标保留 [Oreo Design / Nicole Tang 的 MIT 许可](xhs-card/assets/icons/LICENSE)，字体保留 [OFL 许可](xhs-card/assets/fonts/OFL.txt)。参考作品的归属见 NOTICE；公开包没有包含原作者截图或私人原稿。`xhs-card/assets/approved-cases/` 中的真实照片与品牌内容经作者确认用于展示，不纳入代码 MIT 许可，复用时请换成自己的素材。

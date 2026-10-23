@@ -33,11 +33,12 @@ description: 用户显式指定时，制作或修订小红书轮播与Keynote式
 |原文同步|[文本保真](references/standards/text-sync.md)，不顺带润色|
 |制作、导出、检查|[制作标准](references/standards/production.md)、[验收](references/standards/acceptance.md)|
 |换作者或公开复用|[配置边界](references/profiles/selection.md)|
+|当前确认的真实照片案例|[三张定稿参考](references/approved-cases.md)|
 |参考来源|[Reference与致敬](references/references.md)|
 
 ## 制作与交付
 
-已有项目局部修改，保留旧版。新稿可从`assets/playground/`取参考；示例只是演示内容，事实、照片、署名和页数按本篇更换。Playground支持比例、案例、翻页、缩略图、层次与全屏。
+已有项目局部修改，保留旧版。新稿优先看[三张定稿真实案例](references/approved-cases.md)的视觉完成度，再从`assets/playground/`取比例与重排参考；示例只是演示内容，事实、照片、署名和页数按本篇更换。Playground支持比例、案例、翻页、缩略图、层次与全屏。
 
 先交可编辑预览与实际高清图。默认2倍PNG；PDF、PPTX按请求输出。图版PPTX要说明文字非原生可编辑，不把Keynote式排版写成已经生成原生.key文件。
 
