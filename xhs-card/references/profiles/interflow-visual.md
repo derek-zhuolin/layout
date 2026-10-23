@@ -57,11 +57,11 @@
 
 ## 比例与复用
 
-以上字号以3:4为基准；宽屏和4:3另见 [比例选择](../formats/aspect-ratios.md)，不要按比例整体拉伸。
+以上字号以3:4为基准；9:16、宽屏和4:3另见 [比例选择](../formats/aspect-ratios.md)，不要按比例整体拉伸。
 
 ## 实际参考
 
 - [参考与致敬](../references.md)：Ian、Oreo Design 与字体来源。
-- [通用 Playground](../../assets/playground/index.html)：3:4、16:9、4:3，三种案例。
+- [通用 Playground](../../assets/playground/index.html)：3:4、9:16、16:9、4:3，三种案例。
 - [可编辑样式](../../assets/playground/style.css)：实际字体、层级与阴影。
 - [图标许可](../../assets/icons/LICENSE)、[字体许可](../../assets/fonts/OFL.txt)。
