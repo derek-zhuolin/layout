@@ -1,6 +1,6 @@
 ---
 name: xhs-card
-description: 用户显式指定时，制作或修订小红书轮播与Keynote式deck；支持3:4、16:9、4:3、作者原话轻编辑和定稿锁定，交付Playground、高清PNG及按需PDF/PPTX。沿用蓝白黑、思源黑体、手绘icon和轻UI层次。
+description: 用户显式指定时，制作或修订小红书轮播与Keynote式deck；支持3:4、9:16、16:9、4:3、作者原话轻编辑和定稿锁定，交付Playground、高清PNG及按需PDF/PPTX。沿用蓝白黑、思源黑体、手绘icon和轻UI层次。
 ---
 
 # 小红书 Card
@@ -17,9 +17,9 @@ description: 用户显式指定时，制作或修订小红书轮播与Keynote式
 
 ## 选择形式与比例
 
-- 小红书轮播默认 `carousel / 3:4 / 1080×1440`。
-- Keynote式deck默认 `deck / 16:9 / 1600×900`。
-- 传统投影或紧凑横版可用 `deck / 4:3 / 1200×900`。
+- 竖版卡片：小红书轮播默认 `carousel / 3:4 / 1080×1440`；竖屏长卡可用 `carousel / 9:16 / 1080×1920`。
+- 横版deck：Keynote式默认 `deck / 16:9 / 1600×900`。
+- 同属横版deck的传统投影或紧凑横版可用 `deck / 4:3 / 1200×900`。
 - 用户明确指定比例就遵从；未指定的旧项目保留画布。换比例必须重排，不能拉伸原稿。具体参数见[比例选择](references/formats/aspect-ratios.md)。
 
 ## 按任务读取
