@@ -36,8 +36,8 @@ coverage=','.join(ranges)
 for path in [root/'layout/assets/playground/index.html',root/'layout/assets/playground/style.css']:
     text=path.read_text()
     text=re.sub(r'unicode-range:[^}]+',lambda m:'unicode-range:'+coverage,text)
-    text=text.replace('v=shengxin-1','v=layout-1').replace('v=4formats','v=layout-1')
+    text=text.replace('v=shengxin-1','v=layout-2').replace('v=4formats','v=layout-2')
     path.write_text(text)
 for path in [root/'index.html',root/'layout/assets/playground/slides.html']:
-    path.write_text(path.read_text().replace('v=shengxin-1','v=layout-1'))
+    path.write_text(path.read_text().replace('v=shengxin-1','v=layout-2'))
 print(len(available),'covered Unicode characters; font CSS ranges refreshed.')

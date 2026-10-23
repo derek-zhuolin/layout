@@ -57,6 +57,16 @@ function graph(html) {
     const meta = await page.evaluate(() => ({title:document.title, desc:document.querySelector('meta[name="description"]')?.content, canonical:document.querySelector('link[rel="canonical"]')?.href,refresh:!!document.querySelector('meta[http-equiv="refresh"]')}));
     assert(meta.title.includes('Layout') && meta.desc && meta.canonical.startsWith(publicBase) && !meta.refresh, name + ': metadata');
     report.checks.push(name + ': HTTP, title, description, canonical, JSON-LD');
+    if (name !== 'index.html') {
+      const breadcrumb = nodes.find(x => x['@type'] === 'BreadcrumbList');
+      assert(breadcrumb?.itemListElement.length === 2, name + ': two breadcrumb nodes');
+      const labels = await page.locator('.breadcrumbs li').allTextContents();
+      assert(JSON.stringify(labels) === JSON.stringify(breadcrumb.itemListElement.map(x=>x.name)), name + ': visible/schema breadcrumbs differ');
+    }
+    for (const node of nodes.filter(x=>x['@type']==='ImageObject')) {
+      assert(node.creditText && !node.creator && !node.license && !node.copyrightNotice, name + ': only verified image credit');
+    }
+
     for (const viewport of [{width:1440,height:1050},{width:390,height:844}]) {
       await page.setViewportSize(viewport);
       await page.evaluate(async () => {await document.fonts.ready; await Promise.all([...document.images].map(x => x.decode()));});
@@ -73,7 +83,7 @@ function graph(html) {
     for (const x of Object.values(value)) if (Array.isArray(x)) x.forEach(references); else references(x);
   }
   graphs.forEach(references);
-  const supportedTypes = ['WebSite','WebPage','SoftwareSourceCode','ImageObject','CollectionPage','ItemList'];
+  const supportedTypes = ['WebSite','WebPage','SoftwareSourceCode','ImageObject','CollectionPage','ItemList','BreadcrumbList'];
   for (const node of graphs) assert(supportedTypes.includes(node['@type']), 'Unexpected schema type');
   report.checks.push('3 page graphs: JSON syntax, type inventory and entity references');
   await page.setViewportSize({width:1440,height:1050});
