@@ -1,0 +1,6 @@
+interface:
+  display_name: "省心出图"
+  short_description: "小红书轮播与Keynote式deck，支持3:4、9:16、16:9、4:3和作者原话"
+  default_prompt: "用 $shengxin-chutu 把以下原话和素材做成轮播图或Keynote式deck，沿用蓝白黑、思源黑体、手绘图标和轻UI层次，输出Playground与高清图。"
+policy:
+  allow_implicit_invocation: false

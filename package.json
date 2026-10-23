@@ -1,10 +1,11 @@
 {
-  "name": "xhs-card-playground",
+  "name": "shengxin-chutu-playground",
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "render": "node xhs-card/scripts/render-playground.cjs .",
-    "verify": "node xhs-card/scripts/verify-playground.cjs ."
+    "render": "node shengxin-chutu/scripts/render-playground.cjs .",
+    "verify": "node shengxin-chutu/scripts/verify-playground.cjs .",
+    "smoke": "node shengxin-chutu/scripts/smoke-site.cjs ."
   },
   "devDependencies": {
     "playwright": "^1.56.0",

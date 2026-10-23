@@ -62,6 +62,12 @@
 ## 实际参考
 
 - [参考与致敬](../references.md)：Ian、Oreo Design 与字体来源。
-- [通用 Playground](../../assets/playground/index.html)：3:4、9:16、16:9、4:3，三种案例。
+- [通用 Playground](../../assets/playground/index.html)：3:4、9:16、16:9、4:3，四种案例。
 - [可编辑样式](../../assets/playground/style.css)：实际字体、层级与阴影。
 - [图标许可](../../assets/icons/LICENSE)、[字体许可](../../assets/fonts/OFL.txt)。
+
+## 本地升级中的手绘与纸片组合
+
+保留一页一个主重点。活动页用问题卡、纸夹与一条便签；表达页用想法图标、手绘下划线和短纸条；流程页用胶带固定外层容器、纸签标注分组；图文页用两张实际出图形成素材板。点缀落在模块边缘，不压标题、正文和人脸。
+
+手绘 icon 继续使用随包 Doodle 原 SVG；胶带和手绘下划线由 CSS 构成。多比例分别调整点缀位置，不能把同一组绝对坐标直接缩放。已确认的三张真实成图保持原样，作为源参考。
