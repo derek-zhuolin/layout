@@ -131,13 +131,13 @@ function graph(html) {
   }
   report.checks.push('invalid / negative / fractional slide queries recover');
   await page.goto(url('xhs-card/assets/playground/index.html') + '?ratio=9x16&slide=4');
-  await page.waitForURL('**/layout/assets/playground/index.html?ratio=9x16&slide=4');
+  await page.waitForURL('**/layout/assets/playground/index.html?ratio=9x16&slide=4', {waitUntil:'domcontentloaded'});
   await page.waitForFunction(() => document.querySelector('#counter').textContent === '4 / 4');
   await page.locator('#frame').contentFrame().locator('.caseboard.selected.r-9x16').waitFor();
   await page.goto(url('xhs-card/assets/approved-cases/index.html'));
-  await page.waitForURL('**/layout/assets/approved-cases/index.html');
+  await page.waitForURL('**/layout/assets/approved-cases/index.html', {waitUntil:'domcontentloaded'});
   await page.goto(url('shengxin-chutu/assets/playground/index.html') + '?ratio=16x9&slide=2');
-  await page.waitForURL('**/layout/assets/playground/index.html?ratio=16x9&slide=2');
+  await page.waitForURL('**/layout/assets/playground/index.html?ratio=16x9&slide=2', {waitUntil:'domcontentloaded'});
   await page.waitForFunction(() => document.querySelector('#counter').textContent === '2 / 4');
   report.checks.push('both legacy Playground paths preserve ratio/slide; legacy gallery redirects');
   if (base) for (const filename of ['01.png','02.png','03.png']) {

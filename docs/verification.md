@@ -52,4 +52,6 @@ SITE_URL=https://derek-zhuolin.github.io/layout/ npm run smoke
 
 ## Layout 名称迁移（2026-10-24）
 
-名称、公开链接、命令和图片标识已更新；本轮线上冒烟结果将在部署后补记。旧名称命令保留兼容入口。
+名称、公开链接、命令和图片标识已更新，主命令为 `$layout`；`$shengxin-chutu` 和 `$xhs-card` 保留兼容入口。
+
+新站三页通过 Schema.org 官方验证：0 错误、0 警告。线上检查通过桌面/手机页面、四种比例各四页、16 张 PNG 完整文件一致性、翻页、层次、全屏、异常参数恢复、两个旧入口跳转和 schema 图片尺寸。一次旧案例页完整 load 等待超时，目标链接已确认正确；将跳转断言改为 domcontentloaded 后补验通过。未提交 Google Rich Results Test。
