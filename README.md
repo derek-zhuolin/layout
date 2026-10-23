@@ -110,7 +110,7 @@ HTML/CSS 源稿可编辑；PNG 是出图结果。Keynote 式指排版方向，�
 
 ## 本地重新导出
 
-需要 Node.js 18+。首次安装依赖和 Chromium：
+需要 Node.js 18+；线上冒烟还使用 curl。首次安装依赖和 Chromium：
 
 ```sh
 npm install
@@ -156,3 +156,5 @@ SITE_URL=https://derek-zhuolin.github.io/xhs-card/ npm run smoke
 ```
 
 检查首页、schema、手机布局、四比例共 16 张图、下载尺寸、翻页、图层、全屏与旧链接兼容。报告默认写入系统临时目录，不写入公开仓库。
+
+[本次发布验证记录](docs/verification.md)：三页官方 schema 检测与完整线上冒烟结果。

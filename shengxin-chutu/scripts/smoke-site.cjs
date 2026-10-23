@@ -2,6 +2,7 @@
 const fs = require('fs');
 const path = require('path');
 const os = require('os');
+const {execFileSync} = require('child_process');
 const {pathToFileURL} = require('url');
 const {chromium} = require('playwright');
 const root = path.resolve(process.argv[2] || path.join(__dirname, '../..'));
@@ -15,6 +16,13 @@ const candidates = [process.env.CHROMIUM_EXECUTABLE, chromium.executablePath(), 
 const cache = path.join(os.homedir(), 'Library/Caches/ms-playwright');
 if (fs.existsSync(cache)) for (const name of fs.readdirSync(cache).filter(x => /^chromium-/.test(x)).sort().reverse()) candidates.push(path.join(cache, name, 'chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing'));
 function assert(value, message) { if (!value) throw Error(message); }
+// Use the system network path for binary downloads; browser API request bodies
+// can stall on some proxy configurations even when page/image loading works.
+const downloaded = new Map();
+function downloadBytes(target) {
+  if (!downloaded.has(target)) downloaded.set(target, execFileSync('curl', ['-fsSL','--max-time','60',target], {maxBuffer:32*1024*1024,timeout:65000}));
+  return downloaded.get(target);
+}
 function graph(html) {
   const matches = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)];
   assert(matches.length === 1, 'Expected one JSON-LD block');
@@ -91,9 +99,8 @@ function graph(html) {
       const link = await page.locator('#download').getAttribute('href');
       let bytes;
       if (base) {
-        const response = await context.request.get(new URL(link, page.url()).href);
-        assert(response.status() === 200 && /image\/png/.test(response.headers()['content-type']), 'PNG unavailable');
-        bytes = await response.body();
+        bytes = downloadBytes(new URL(link, page.url()).href);
+        assert(bytes.equals(fs.readFileSync(path.join(root, 'examples',format.folder,String(item.id).padStart(2,'0')+'.png'))), 'PNG differs from exported file');
       } else bytes = fs.readFileSync(path.join(root, 'examples',format.folder,String(item.id).padStart(2,'0')+'.png'));
       assert(bytes.readUInt32BE(16) === format.width * 2 && bytes.readUInt32BE(20) === format.height * 2, 'PNG resolution');
     }
@@ -111,6 +118,7 @@ function graph(html) {
     await page.waitForFunction(() => document.querySelector('#counter').textContent === '4 / 4');
     report.checks.push(format.id + ': 4 slides, bounds, 2x PNGs, thumbnails, previous/next, keyboard, depth');
   }
+  report.checks.push('All 16 PNG downloads match the full local exported files');
   await page.locator('#fullscreen').click();
   await page.waitForFunction(() => !!document.fullscreenElement);
   await page.evaluate(() => document.exitFullscreen());
@@ -130,13 +138,13 @@ function graph(html) {
   await page.waitForURL('**/shengxin-chutu/assets/approved-cases/index.html');
   report.checks.push('legacy Playground preserves ratio/slide; legacy gallery redirects');
   if (base) for (const filename of ['01.png','02.png','03.png']) {
-    const old = await context.request.get(url('xhs-card/assets/approved-cases/' + filename));
-    const fresh = await context.request.get(url('shengxin-chutu/assets/approved-cases/' + filename));
-    assert(old.status() === 200 && fresh.status() === 200 && (await old.body()).equals(await fresh.body()), 'Legacy image mismatch');
+    const old = downloadBytes(url('xhs-card/assets/approved-cases/' + filename));
+    const fresh = downloadBytes(url('shengxin-chutu/assets/approved-cases/' + filename));
+    assert(old.equals(fresh), 'Legacy image mismatch');
   }
   for (const node of graphs.filter(x => x['@type'] === 'ImageObject')) {
     const local = node.contentUrl.slice(publicBase.length);
-    const bytes = base ? await (await context.request.get(url(local))).body() : fs.readFileSync(path.join(root, local));
+    const bytes = base ? downloadBytes(url(local)) : fs.readFileSync(path.join(root, local));
     assert(bytes.readUInt32BE(16) === node.width && bytes.readUInt32BE(20) === node.height, 'Schema image dimensions');
   }
   report.checks.push('schema ImageObject URLs and dimensions match actual PNGs');
