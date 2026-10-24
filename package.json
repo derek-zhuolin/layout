@@ -5,7 +5,8 @@
   "scripts": {
     "render": "node layout/scripts/render-playground.cjs .",
     "verify": "node layout/scripts/verify-playground.cjs .",
-    "smoke": "node layout/scripts/smoke-site.cjs ."
+    "smoke": "node layout/scripts/smoke-site.cjs .",
+    "verify:starter": "node layout/scripts/verify-starter.cjs ."
   },
   "devDependencies": {
     "playwright": "^1.56.0",

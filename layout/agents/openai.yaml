@@ -1,6 +1,6 @@
 interface:
   display_name: "Layout"
   short_description: "小红书轮播与Keynote式deck，支持3:4、9:16、16:9、4:3和作者原话"
-  default_prompt: "用 $layout 把以下原话和素材做成轮播图或Keynote式deck，沿用蓝白黑、思源黑体、手绘图标和轻UI层次，输出Playground与高清图。"
+  default_prompt: "用 $layout 先查看本次素材，支持按口述目录找图；未提供时询问一次，无图完成文字版。有图优先相纸窗口，品牌角标默认关闭。把原话和素材做成轮播或deck，沿用蓝白黑、思源黑体、手绘图标和轻UI层次，输出Playground与高清图。"
 policy:
   allow_implicit_invocation: false

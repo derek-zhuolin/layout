@@ -26,7 +26,7 @@
 
 [查看完整大图与下载](https://derek-zhuolin.github.io/layout/layout/assets/approved-cases/index.html) · [案例说明](layout/references/approved-cases.md)
 
-下面保留四种比例的模板示例。活动、表达、流程页使用合成内容；图文素材板引用已确认的真实案例。文案和素材可替换。
+下面保留四种比例的模板示例。活动、表达、流程页使用合成内容；图文素材板引用已确认的真实案例。这里是参考展示；新项目从无品牌 starter 开始，不自动沿用这些照片、品牌与角标。
 
 ### 3:4 · 小红书轮播
 
@@ -102,6 +102,23 @@ cp -R ./layout/layout ./layout/shengxin-chutu ./layout/xhs-card ~/.codex/skills/
 
 轻编辑保留作者的判断、具体观察和语气。定稿锁定后，字、标点、空格和分段都保持。具体规则见 [作者语气](layout/references/profiles/author-voice.md) 和 [文本保真](layout/references/standards/text-sync.md)。
 
+## 新稿先看素材，不继承示例品牌
+
+可以直接口述「桌面上次活动文件夹里的合照」。Agent 先在指定范围定位、查看图片；只有多张相近或用途不清时再确认，不强制提供完整路径。没有提供素材时询问一次，明确无图就做完整文字版。
+
+有合适图片时优先相纸窗口：文字区与照片分开，边框、轻阴影和少量手绘元素形成层次。全幅背景覆字仅在本次明确选择时使用；图表与截图优先完整、水平展示。品牌、Logo、署名与栏目角标默认关闭，来源致谢独立保留。
+
+新项目从[无品牌骨架](layout/assets/starter/README.md)创建，参考展示保留原样：
+
+```sh
+python3 layout/scripts/new-project.py --output ./my-cards --ratio 3x4
+# 已确认图片后，可追加 --photo ./selected-photo.jpg --photo-alt "本次交流现场"
+```
+
+打开输出目录的 `index.html`，编辑 `assets/starter/config.js`。脚本只复制必要字体、图标与代码，不复制案例照片；不覆盖已有目录。可传 `--config content.json` 使用自己的内容。骨架是单页起点，整组页数与布局按内容变化。
+
+验收分为硬问题、视觉复核和可选增强。重要原话、证据和限定条件不能为固定字号、页数或装饰配额而删掉。完整场景见[验收标准](layout/references/standards/acceptance.md)。
+
 ## Playground
 
 [在线体验](https://derek-zhuolin.github.io/layout/layout/assets/playground/index.html) 按竖版卡片（3:4、9:16）和横版 deck（16:9、4:3）分组，可切换比例、案例、平面/轻浮起层次，支持缩略图跳转、方向键翻页和全屏。也可直接打开本地 `index.html`，完全使用随包字体与图标。
@@ -134,7 +151,7 @@ npm run smoke
 
 - [3:4 / 9:16 / 16:9 / 4:3 的参数与重排](layout/references/formats/aspect-ratios.md)
 - [轮播排版](layout/references/formats/carousel.md) / [deck 排版](layout/references/formats/deck.md)
-- [字体、icon、阴影与粘土点缀](layout/references/profiles/interflow-visual.md)
+- [字体、icon、阴影与粘土点缀](layout/references/profiles/layout-visual.md)
 - [Reference 与致敬](NOTICE.md)
 
 ## License
