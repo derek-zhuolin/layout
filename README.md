@@ -151,6 +151,7 @@ npm run smoke
 
 - [3:4 / 9:16 / 16:9 / 4:3 的参数与重排](layout/references/formats/aspect-ratios.md)
 - [轮播排版](layout/references/formats/carousel.md) / [deck 排版](layout/references/formats/deck.md)
+- [无图排版参考](layout/references/formats/text-led.md)：收紧内容组间距、语义手绘 icon 和小卡层次，按当前内容选用，不固定三块卡片或标题位置。
 - [字体、icon、阴影与粘土点缀](layout/references/profiles/layout-visual.md)
 - [Reference 与致敬](NOTICE.md)
 

@@ -41,6 +41,7 @@ description: 用户显式指定时，制作或修订小红书轮播与Keynote式
 |---|---|
 |素材、口述路径、图片用途|[素材确认](references/standards/material-intake.md)|
 |轮播图|[轮播排版](references/formats/carousel.md)|
+|无图版偏空、希望收紧分组或丰富小卡|[无图排版参考](references/formats/text-led.md)，按内容选用，不是固定模板|
 |演示deck|[deck规则](references/formats/deck.md)|
 |视觉、字体、icon、阴影与粘土点缀|[默认视觉](references/profiles/layout-visual.md)|
 |保留作者语气|[轻编辑尺度](references/profiles/author-voice.md)|
